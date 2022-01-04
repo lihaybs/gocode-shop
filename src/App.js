@@ -1,15 +1,8 @@
+import { useState } from 'react';
 import Header from './components/Header/Header';
 import Products from './components/Products/Products';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Products products={products} />
-    </div>
-  );
-}
 const products = [
   {
     "id": 1,
@@ -252,4 +245,18 @@ const products = [
     }
   }
 ];
+
+const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index);
+function App() {
+  const [selectValue, setSelectValue] = useState(categories[0]);
+  const selectVal = (val) => {
+    setSelectValue(val)
+  };
+  return (
+    <div className="App">
+      <Header categories={categories} selectVal={selectVal} />
+      <Products products={products.filter(product => product.category === selectValue)} />
+    </div>
+  );
+}
 export default App;

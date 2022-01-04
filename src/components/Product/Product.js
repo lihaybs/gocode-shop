@@ -2,7 +2,7 @@ import './Product.css'
 const Product = ({ img, name, price }) => (
     <div class="product-card">
         <div class="product-image">
-            <img src={img} alt="image" />
+            <img src={img} alt="" />
         </div>
         <div class="product-info">
             <h5> {name} </h5>
