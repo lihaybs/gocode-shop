@@ -1,4 +1,7 @@
+
 import './Header.css'
+
+
 const Header = ({ categories, selectVal }) => {
     console.log(categories);
     return (

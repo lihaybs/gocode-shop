@@ -1,5 +1,9 @@
+
 import Product from "../Product/Product";
 import './Products.css'
+
+
+
 const Products = ({ products }) => {
     return (
         <section className="products">
