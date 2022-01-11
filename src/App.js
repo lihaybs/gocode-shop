@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Header categories={categories} selectVal={selectVal} />
-      <Products products={products.filter(product => product.category === selectVal)} />
+      <Products products={productFilter} />
     </div>
   );
 }
