@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './components/Header/Header';
 import Products from './components/Products/Products';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [products, setProducts] = useState([])
