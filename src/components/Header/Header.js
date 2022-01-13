@@ -4,9 +4,8 @@ import Form from 'react-bootstrap/Form'
 
 
 const Header = ({ categories, selectVal }) => {
-    console.log(categories);
     return (
-        <nav class="product-filter">
+        <nav className="product-filter">
             <h1>Welcome to my shop</h1>
 
             <div className="sort">
@@ -17,7 +16,7 @@ const Header = ({ categories, selectVal }) => {
                     </Form.Select>
                 </div>
 
-                <div class="collection-sort">
+                <div className="collection-sort">
                     <label>Sort by:</label>
                     <Form.Select>
                         <option value="/">Featured</option>
