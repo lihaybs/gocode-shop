@@ -1,17 +1,13 @@
-
 import Product from "../Product/Product";
-import './Products.css'
-
-
+import "./Products.css";
 
 const Products = ({ products, updateCart }) => {
-    return (
-        <section className="products">
-            {products.map(({ id, image, title, price }) => (
-                <Product key={id} img={image} name={title} price={price} id={id} updateCart={updateCart} />
-            ))}
-        </section>
-    );
+    return (<section className="products">
+        {products.map(({ id, image, title, price, counter }) => (
+            <Product key={id} img={image} title={title} price={price} id={id} counter={counter} updateCart={updateCart} />
+        ))}
+    </section>)
 };
 
-export default Products;
+
+export default Products

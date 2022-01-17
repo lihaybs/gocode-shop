@@ -1,46 +1,61 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import './App.css';
 import Header from './components/Header/Header';
 import Products from './components/Products/Products';
-import product from './components/Product/Product';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './components/Cart/Cart';
 
 function App() {
-  const [products, setProducts] = useState([])
+  const [products, setproducts] = useState([""]);
+  const [productfilterd, setproductfilterd] = useState([""]);
   const [cartList, setCartList] = useState([])
-  const [productFilter, setProductsFilter] = useState([])
-  const categories = [`All`, ...products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index)];
-  const updateCart = (id) => {
-    if (products[0].counter === undefined) {
-      setProducts(products.map(product => product.counter ? product : product.counter = 0))
-      console.log("hello");
-    }
-    setProducts(products.map(product => (product.id === id) ? { ...product, counter: (product.counter + 1) } : product));
-    setCartList(products.filter(product => product.counter > 0));
+  const categories = ["All", ...products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index)]
+
+
+  function updateCart(add, id) {
+
+    setproducts(products.map(product => {
+      add === -1 && product.id === id ? product.counter = 0 : add && product.id === id ? product.counter++ : !add && product.id === id && product.counter--
+      return product
+    }))
     console.log(products);
-  };
+    setCartList(products.filter(product => product.counter > 0));
+
+  }
+
+
+
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/`)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data)
-        setProductsFilter(data)
+        data.map(product => { product.counter = 0; return product })
+        setproducts(data)
+        setproductfilterd(data)
       })
   }, []);
 
 
+
   const selectVal = (val) => {
-    setProductsFilter(val === "All" ? products : products.filter(products => products.category === val));
+    setproductfilterd(val === "All" ? products : products.filter(product => product.category === val));
+  };
+
+
+  const sortAfterSelect = (val) => {
+    setproductfilterd(productfilterd.sort((a, b) => a[val] - b[val]))
   }
   return (
     <div className="App">
-      <Header categories={categories} selectVal={selectVal} />
-      <Cart cartList={cartList} />
-      <Products products={productFilter} updateCart={updateCart} />
+      <Header categories={categories} selectVal={selectVal} sortAfterSelect={sortAfterSelect} />
+      <div className='shopping-aria'>
+        <Cart cartList={cartList} updateCart={updateCart} />
+        <Products products={productfilterd} updateCart={updateCart} />
+      </div>
     </div>
   );
 }
+
+
 export default App;
