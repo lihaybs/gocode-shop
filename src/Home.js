@@ -23,9 +23,6 @@ function Home() {
 
     }
 
-
-
-
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products/`)
             .then((res) => res.json())
@@ -36,12 +33,9 @@ function Home() {
             })
     }, []);
 
-
-
     const selectVal = (val) => {
         setproductfilterd(val === "All" ? products : products.filter(product => product.category === val));
     };
-
 
     const sortAfterSelect = (val) => {
         setproductfilterd(productfilterd.sort((a, b) => a[val] - b[val]))
